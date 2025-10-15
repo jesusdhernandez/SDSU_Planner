@@ -1,17 +1,97 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Health Check</title>
-  <link rel="stylesheet" href="./styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SDSU Calender</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>Hello 👋</h1>
-  <p>Click the button to call <code>/api/health</code> on the backend.</p>
+  <h1>SDSU Calender</h1>
+   <div id = "Options">
+        <form id = "addTask">
+            <h3>Add Task</h3>
+            <div>
+                <label for="Task">Name:</label>
+                <input type="text" id="Task" name="Task">
+            </div>
+            <div>
+                 <label for="Day">Day:</label>
+                <input type="number" id="Day" name="Day">
+            </div>
+            <div>
+                <label for="Number">Number:</label>
+                <input type="number" id="Number" name="Number">
+            </div>                       
+            <input type="submit" id = "Sumbit" name="Submit" value="Add Task">
+        </form> 
+        <form id = "deleteTask">
+            <h3>Delete Task</h3>
+            <div>
+                <label for="Task">Name:</label>
+                <input type="text" id="Task" name="Task">
+            </div>
+            <div>
+                 <label for="Day">Day:</label>
+                <input type="number" id="Day" name="Day">
+            </div>
+            <div>
+                <label for="Number">Number:</label>
+                <input type="number" id="Number" name="Number">
+            </div>                       
+            <input type="submit" id = "Sumbit" name="Submit" value="Delete Task">
+        </form> 
+        <form id = "modifyTask">
+            <h3>Modify Task</h3>
+            <div>
+                <label for="Task">Name:</label>
+                <input type="text" id="Task" name="Task">
+            </div>
+            <div>
+                 <label for="Day">Day:</label>
+                <input type="number" id="Day" name="Day">
+            </div>
+            <div>
+                <label for="Number">Number:</label>
+                <input type="number" id="Number" name="Number">
+            </div>                       
+            <input type="submit" id = "Sumbit" name="Submit" value="Modify Task">
+        </form> 
+   </div>
+    
+   <div id="calender">
+    <div id = "1">1</div>
+    <div id = "2">2</div>
+    <div id = "3">3</div>
+    <div id = "4">4</div>
+    <div id = "5">5</div>
+    <div id = "6">6</div>
+    <div id = "7">7</div>
+    <div id = "8">8</div>
+    <div id = "9">9</div>
+    <div id = "10">10</div>
+    <div id = "11">11</div>
+    <div id = "12">12</div>
+    <div id = "13">13</div>
+    <div id = "14">14</div>
+    <div id = "15">15</div>
+    <div id = "16">16</div>
+    <div id = "17">17</div>
+    <div id = "18">18</div>
+    <div id = "19">19</div>
+    <div id = "20">20</div>
+    <div id = "21">21</div>
+    <div id = "22">22</div>
+    <div id = "23">23</div>
+    <div id = "24">24</div>
+    <div id = "25">25</div>
+    <div id = "26">26</div>
+    <div id = "27">27</div>
+    <div id = "28">28</div>
+   </div>
+  <p><small>Total: <span id="cnt">0</span></small></p>
 
-  <button id="btnHealth">Check API Health</button>
-  <pre id="output">[nothing yet]</pre>
 
-  <script src="./app.js"></script>
 </body>
 </html>

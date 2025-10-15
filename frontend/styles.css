@@ -1,3 +1,18 @@
-body { font-family: sans-serif; background: #f4f6f9; padding: 20px; }
-button { padding: 10px 16px; border: none; background: #1f6feb; color: white; border-radius: 8px; }
-pre { background: #111; color: #0f0; padding: 12px; border-radius: 8px; margin-top: 10px; }
+ #calender {
+        display: grid;
+        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
+        grid-template-rows: 200px 200px 200px 200px;
+
+    }
+    #calender div{
+        border: 2px solid black;
+        font-size: 25px;
+    }
+    #Options {
+        display: flex;
+        color:red;
+    }
+    #Options form {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
