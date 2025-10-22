@@ -42,29 +42,38 @@ def add_task():
     number = int(d.get("number"))
     t = {"id": str(uuid.uuid4()), "title": title, "day": day, "number": number, "done": False}
     # print(t)
-    tasks = load()
-    tasks["number_of_tasks"]+=1
+    data = load()
+    data["number_of_tasks"]+=1
     # print(tasks)
-    tasks["list_of_tasks"].append(t)
+    tasks = data["list_of_tasks"]
+    for task in tasks:
+        if(task["day"] == day and task["number"] == number):
+            print("cannot add")
+            return jsonify(t), 201
     # print(tasks)
-    overwrite(tasks)
+    data["list_of_tasks"].append(t)
+    overwrite(data)
     return jsonify(t), 201
+    
 
 @app.delete("/api/tasks")
 def remove_task():
     d = request.get_json()
     day = number = int(d.get("day"))
     number = int(d.get("number"))
-    tasks = load()
+    data = load()
     new_tasks = []
-    deleted_task
-    for task in tasks:
-        if(not(task.day == day and task.number == number)):
+    deleted_task = None
+    for task in data["list_of_tasks"]:
+        if(not(task["day"] == day and task["number"] == number)):
             new_tasks.append(task)
         else:
             deleted_task = task
-    overwrite(new_tasks)
-    return jsonify(deleted_task), 201
+    if deleted_task is None:
+        return jsonify({"error": "Task not found"}), 404
+    data["list_of_tasks"] = new_tasks
+    overwrite(data)
+    return jsonify(deleted_task), 200
     
     
 
