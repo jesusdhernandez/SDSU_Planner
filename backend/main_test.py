@@ -6,8 +6,6 @@ import main as app_module
 
 @pytest.fixture()
 def client(tmp_path):
-    """A simpler client fixture without monkeypatch."""
-    # Create a fake tasks.json inside pytest's tmp_path
     fake_tasks = tmp_path / "fake_tasks.json"
     fake_data = {
         "number_of_tasks": 2,
