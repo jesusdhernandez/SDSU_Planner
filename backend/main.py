@@ -49,7 +49,7 @@ def add_task():
     for task in tasks:
         if(task["day"] == day and task["number"] == number):
             print("cannot add")
-            return jsonify(t), 201
+            return jsonify(t), 400
     # print(tasks)
     data["list_of_tasks"].append(t)
     overwrite(data)
@@ -76,8 +76,6 @@ def remove_task():
     return jsonify(deleted_task), 200
     
     
-
-
 
 
 
