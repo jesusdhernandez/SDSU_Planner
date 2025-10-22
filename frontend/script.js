@@ -51,22 +51,46 @@ async function displayTasks(){
     }
 }
 
+function clear(){
+    for(let i = 0; i < 27; i++){
+        if(cal.children[i].children[0]){
+                    cal.children[i].children[0].remove()
+        }
+    }
+}
+
+
 //event is the submit event contains the type and data 
 async function taskAdded(event) {
     event.preventDefault();
     const data = new FormData(event.target);
     const title = data.get("Task").toString().trim();
     const day = Number(data.get("Day"));
-    const number = Number(data.get("Number"))
+    const number = Number(data.get("Number"));
 
     const created = await api("/api/tasks", {method: "POST", body: JSON.stringify({title, day, number})})
-    addTaskToUI(created);
+    clear()
+    displayTasks()
     cnt.textContent = String(Number(cnt.textContent)+1)
 }
+
+async function taskDeleted(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const title = data.get("Task").toString().trim();
+    const day = Number(data.get("Day"));
+    const number = Number(data.get("Number"));
+    const created = await api("/api/tasks", {method: "DELETE", body: JSON.stringify({title, day, number})})
+    clear()
+    displayTasks()
+    cnt.textContent = String(Number(cnt.textContent)-1)
+}
+
+
 
 console.log("sTARTED");
 displayTasks();
 document.getElementById("addTask").addEventListener("submit",taskAdded);
-document.getElementById("deleteTask")
+document.getElementById("deleteTask").addEventListener("submit",taskDeleted);
 
 
