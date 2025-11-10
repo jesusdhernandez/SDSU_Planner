@@ -1,10 +1,10 @@
- #calender {
+ #calendar {
         display: grid;
         grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
         grid-template-rows: 200px 200px 200px 200px;
 
     }
-    #calender div{
+    #calendar div{
         border: 2px solid black;
         font-size: 25px;
     }

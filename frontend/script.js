@@ -12,7 +12,7 @@ async function api(path,opts){
     }
 }
 
-const cal = document.getElementById("calender");
+const cal = document.getElementById("calendar");
 const cnt = document.getElementById("cnt")
 
 function dayCell(d){
