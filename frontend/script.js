@@ -86,11 +86,40 @@ async function taskDeleted(event) {
     cnt.textContent = String(Number(cnt.textContent)-1)
 }
 
+async function taskModified(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    
+    // Fields to find the task
+    const original_day = Number(data.get("OriginalDay"));
+    const original_number = Number(data.get("OriginalNumber"));
+    
+    // New values (can be empty to keep original)
+    const title = data.get("NewTask").toString().trim();
+    const day = data.get("NewDay") ? Number(data.get("NewDay")) : original_day;
+    const number = data.get("NewNumber") ? Number(data.get("NewNumber")) : original_number;
+    
+    console.log("Modify attempt with:", {original_day, original_number, title, day, number});
+    
+    try {
+        const modified = await api("/api/tasks", {method: "PUT", body: JSON.stringify({original_day, original_number, title, day, number})})
+        console.log("Modified response:", modified);
+        clear()
+        displayTasks()
+        // Clear the form
+        event.target.reset();
+    } catch (error) {
+        console.error("Error modifying task:", error);
+        alert("Error modifying task: " + error.message);
+    }
+}
+
 
 
 console.log("sTARTED");
 displayTasks();
 document.getElementById("addTask").addEventListener("submit",taskAdded);
 document.getElementById("deleteTask").addEventListener("submit",taskDeleted);
+document.getElementById("modifyTask").addEventListener("submit",taskModified);
 
 
