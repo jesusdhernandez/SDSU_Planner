@@ -1,7 +1,55 @@
 body
 {
         font-family: Arial, sans-serif;
-        background-color: bisque;
+        background-color: #E62020;
+        margin: 0;
+}
+
+/* Top navigation bar */
+#topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    margin: 0;
+
+}
+
+#topbar .logo {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+#topbar ul {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+#topbar li {
+    display: inline-block;
+}
+
+#topbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#topbar a:hover {
+    text-decoration: underline;
+}
+
+/* breathing room*/
+.page-content {
+    padding: 16px 20px;
 }
 
 #calendar 
@@ -20,7 +68,7 @@ body
 #Options 
 {
         display: flex;
-        color:red;
+        color:black;
 }
 
 #Options form 

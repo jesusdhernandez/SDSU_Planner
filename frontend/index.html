@@ -4,11 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SDSU Calendar</title>
+    <link rel="icon" type="image/jpeg" href="./assets/SDSU logo.jpg">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>SDSU Calendar</h1>
+<nav id="topbar">
+    <div class="logo">
+        <img src="./assets/text%20logo.png" alt="logo" width="60" height="40" style="margin-right: 10px;">
+
+        Calendar
+    </div>
+    <ul>
+
+        <li><a href="https://canvas.sdsu.edu" target="_blank" rel="noopener noreferrer">Canvas</a></li>
+        <li><a href="https://sdsu.instructure.com/calendar#view_name=month" target="_blank" rel="noopener noreferrer">Calendar</a></li>
+        <!-- Update these links to whatever you actually use -->
+        <li><a href="https://canvas.sdsu.edu/courses/12345" target="_blank" rel="noopener noreferrer">CS 210</a></li>
+        <li><a href="https://canvas.sdsu.edu/courses/23456" target="_blank" rel="noopener noreferrer">CS 250</a></li>
+        <li><a href="https://canvas.sdsu.edu/courses/34567" target="_blank" rel="noopener noreferrer">MATH 245</a></li>
+    </ul>
+</nav>
+
+<main class="page-content">
    <div id = "Options">
         <form id = "addTask">
             <h3>Add Task</h3>
