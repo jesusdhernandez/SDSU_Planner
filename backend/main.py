@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify, send_from_directory
 import sys
 from pathlib import Path
 
+import requests from icalendar import Calendar
+
 BACKEND_DIR  = Path(__file__).resolve().parent           # .../project/backend
 PROJECT_ROOT = BACKEND_DIR.parent                        # .../project
 FRONTEND_DIR = PROJECT_ROOT / "frontend"                 # .../project/frontend
@@ -22,6 +24,69 @@ def overwrite(tasks):
     with DATA.open("w") as f:
         json.dump(tasks, f, indent=2)
 
+    #ics 
+def normalize_to_date(dt_obj):
+    """
+    Convert an icalendar date/datetime (or similar) into a Python date.
+    Canvas ICS may give either date or datetime objects.
+    """
+    if isinstance(dt_obj, datetime):
+        return dt_obj.date()
+    if isinstance(dt_obj, date):
+        return dt_obj
+
+    # Fallback: try parsing from string representation
+    return datetime.fromisoformat(str(dt_obj)).date()
+
+
+def load_ics_calendar(url: str) -> Calendar:
+    """Download and parse an ICS calendar from a URL."""
+    resp = requests.get(url, timeout=10)
+    resp.raise_for_status()
+    return Calendar.from_ical(resp.content)
+
+
+def get_ics_events_for_month(cal: Calendar, month: int, year: int):
+    """
+    Return a list of dicts for events in the given month/year.
+
+    Each dict has:
+      - summary
+      - description
+      - start_date (ISO string)
+      - end_date (ISO string or None)
+    """
+    results = []
+
+    for comp in cal.walk("VEVENT"):
+        dtstart = comp.get("DTSTART")
+        if not dtstart:
+            continue
+
+        start_date = normalize_to_date(dtstart.dt)
+        if start_date.year != year or start_date.month != month:
+            continue
+
+        dtend = comp.get("DTEND")
+        end_date = normalize_to_date(dtend.dt) if dtend else None
+
+        summary = str(comp.get("SUMMARY", "Untitled"))
+        description = str(comp.get("DESCRIPTION", ""))
+
+        # If you want to only include *assignments*, you can do a simple filter:
+        # if "assignment" not in summary.lower():
+        #     continue
+
+        results.append({
+            "summary": summary,
+            "description": description,
+            "start_date": start_date.isoformat(),
+            "end_date": end_date.isoformat() if end_date else None,
+        })
+
+    # sort by start_date
+    results.sort(key=lambda e: e["start_date"])
+    return results
 #displays the initial html
 @app.route("/")
 def index():
