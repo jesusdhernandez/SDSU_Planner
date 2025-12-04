@@ -28,47 +28,116 @@
 </nav>
 
 <main class="page-content">
+   <div id="month-nav">
+        <label for="monthSelector">Jump to Month:</label>
+        <select id="monthSelector">
+            <option value="">Select a month...</option>
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+   </div>
+
    <div id = "Options">
         <form id = "addTask">
             <h3>Add Task</h3>
             <div>
-                <label for="Task">Name:</label>
-                <input type="text" id="Task" name="Task">
+                <label for="TaskName">Name:</label>
+                <input type="text" id="TaskName" name="TaskName">
             </div>
             <div>
-                 <label for="Day">Day:</label>
-                <input type="number" id="Day" name="Day">
+                <label for="AddMonth">Month:</label>
+                <select id="AddMonth" name="AddMonth" required>
+                    <option value="">Select Month</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
             </div>
             <div>
-                <label for="Number">Number:</label>
-                <input type="number" id="Number" name="Number">
+                <label for="AddDay">Day:</label>
+                <input type="number" id="AddDay" name="AddDay" min="1" max="31" required>
+            </div>
+            <div>
+                <label for="AddNumber">Number:</label>
+                <input type="number" id="AddNumber" name="AddNumber" required>
             </div>                       
             <input type="submit" id = "Submit" name="Submit" value="Add Task">
         </form> 
         <form id = "deleteTask">
             <h3>Delete Task</h3>
             <div>
-                <label for="Task">Name:</label>
-                <input type="text" id="Task" name="Task">
+                <label for="DeleteMonth">Month:</label>
+                <select id="DeleteMonth" name="DeleteMonth" required>
+                    <option value="">Select Month</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
             </div>
             <div>
-                 <label for="Day">Day:</label>
-                <input type="number" id="Day" name="Day">
+                <label for="DeleteDay">Day:</label>
+                <input type="number" id="DeleteDay" name="DeleteDay" min="1" max="31" required>
             </div>
             <div>
-                <label for="Number">Number:</label>
-                <input type="number" id="Number" name="Number">
+                <label for="DeleteNumber">Number:</label>
+                <input type="number" id="DeleteNumber" name="DeleteNumber" required>
             </div>                       
             <input type="submit" id = "Submit" name="Submit" value="Delete Task">
         </form> 
         <form id = "modifyTask">
             <h3>Modify Task</h3>
-            <p><small>Enter the Day and Number to find the task, then enter the new values</small></p>
+            <p><small>Enter the Month, Day and Number to find the task, then enter the new values</small></p>
             <fieldset>
                 <legend>Find Task By:</legend>
                 <div>
+                    <label for="OriginalMonth">Month:</label>
+                    <select id="OriginalMonth" name="OriginalMonth" required>
+                        <option value="">Select Month</option>
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+                <div>
                     <label for="OriginalDay">Day:</label>
-                    <input type="number" id="OriginalDay" name="OriginalDay" required>
+                    <input type="number" id="OriginalDay" name="OriginalDay" min="1" max="31" required>
                 </div>
                 <div>
                     <label for="OriginalNumber">Number:</label>
@@ -82,8 +151,26 @@
                     <input type="text" id="NewTask" name="NewTask">
                 </div>
                 <div>
+                    <label for="NewMonth">New Month:</label>
+                    <select id="NewMonth" name="NewMonth">
+                        <option value="">Keep Same</option>
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+                <div>
                     <label for="NewDay">New Day:</label>
-                    <input type="number" id="NewDay" name="NewDay">
+                    <input type="number" id="NewDay" name="NewDay" min="1" max="31">
                 </div>
                 <div>
                     <label for="NewNumber">New Number:</label>
@@ -94,36 +181,7 @@
         </form> 
    </div>
     
-   <div id="calendar">
-    <div id = "1">1</div>
-    <div id = "2">2</div>
-    <div id = "3">3</div>
-    <div id = "4">4</div>
-    <div id = "5">5</div>
-    <div id = "6">6</div>
-    <div id = "7">7</div>
-    <div id = "8">8</div>
-    <div id = "9">9</div>
-    <div id = "10">10</div>
-    <div id = "11">11</div>
-    <div id = "12">12</div>
-    <div id = "13">13</div>
-    <div id = "14">14</div>
-    <div id = "15">15</div>
-    <div id = "16">16</div>
-    <div id = "17">17</div>
-    <div id = "18">18</div>
-    <div id = "19">19</div>
-    <div id = "20">20</div>
-    <div id = "21">21</div>
-    <div id = "22">22</div>
-    <div id = "23">23</div>
-    <div id = "24">24</div>
-    <div id = "25">25</div>
-    <div id = "26">26</div>
-    <div id = "27">27</div>
-    <div id = "28">28</div>
-   </div>
+   <div id="calendar"></div>
   <p><small>Total: <span id="cnt">0</span></small></p>
 
 

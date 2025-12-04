@@ -52,17 +52,137 @@ body
     padding: 16px 20px;
 }
 
-#calendar 
-{
-        display: grid;
-        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px;
-        grid-template-rows: 200px 200px 200px 200px;
+#month-nav {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    padding: 15px 20px;
+    border-bottom: 2px solid #333;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-#calendar div
+#month-nav label {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+#month-nav select {
+    padding: 8px 12px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: white;
+}
+
+#month-nav select:hover {
+    background-color: #f0f0f0;
+}
+
+#calendar 
 {
-        border: 2px solid black;
-        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+}
+
+.month {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.month h2 {
+    background-color: #333;
+    color: white;
+    margin: 0;
+    padding: 18px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.month-header-container {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.month-header-container h2 {
+    margin: 0;
+    padding: 18px;
+    flex: 1;
+    text-align: center;
+    font-size: 28px;
+    color: white;
+}
+
+.go-to-top-btn {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-right: 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.go-to-top-btn:hover {
+    background-color: #005a9e;
+}
+
+.month-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #ddd;
+    padding: 1px;
+}
+
+.day-cell {
+    background-color: white;
+    min-height: 140px;
+    padding: 14px;
+    font-size: 14px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.day-number {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.day-cell ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+}
+
+.day-cell li {
+    background-color: #e8f4f8;
+    margin: 2px 0;
+    padding: 4px;
+    border-radius: 3px;
+    border-left: 3px solid #0078d4;
+    word-wrap: break-word;
 }
 
 #Options 
