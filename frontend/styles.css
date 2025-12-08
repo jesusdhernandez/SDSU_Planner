@@ -187,7 +187,10 @@ body
 
 #Options 
 {
+        margin: 20px auto;
         display: flex;
+        gap: 20px;
+        justify-content: center;
         color:black;
 }
 
@@ -195,4 +198,81 @@ body
 {
         padding-left: 20px;
         padding-right: 20px;
+        background-color: #333;
+        color: #ffffff;
+        padding: 20px 24px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+}
+
+/* global inputs are styled later; removed duplicate block that interfered
+   with .formGrid vertical centering */
+
+#Submit
+{
+        margin-top: 20px;
+        background-color: #0078d4;
+        transition: background-color 0.2s ease-in-out;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+}
+
+#Submit:hover
+{
+        background-color: #005a9e;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 10px;
+    align-items: center;
+}
+
+.formGrid > .label,
+.formGrid > .input {
+    display: flex;
+    align-items: center;
+}
+
+.formGrid label 
+{
+    display: block;
+    background-color: #494949;
+    color: #ffffff;   
+    padding: 10px 12px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formGrid .input > input,
+.formGrid .input > select,
+.formGrid .input > textarea {
+    width: 97% !important; 
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 !important; 
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+    .formGrid > .label,
+    .formGrid > .input {
+        align-items: stretch;
+    }
+    .formGrid label {
+        width: 100%;
+    }
 }

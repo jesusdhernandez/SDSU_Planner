@@ -47,79 +47,16 @@
         </select>
    </div>
 
-   <div id = "Options">
-        <form id = "addTask">
+    <div id="Options">
+        <form id="addTask">
             <h3>Add Task</h3>
-            <div>
-                <label for="TaskName">Name:</label>
-                <input type="text" id="TaskName" name="TaskName">
-            </div>
-            <div>
-                <label for="AddMonth">Month:</label>
-                <select id="AddMonth" name="AddMonth" required>
-                    <option value="">Select Month</option>
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                </select>
-            </div>
-            <div>
-                <label for="AddDay">Day:</label>
-                <input type="number" id="AddDay" name="AddDay" min="1" max="31" required>
-            </div>
-            <div>
-                <label for="AddNumber">Number:</label>
-                <input type="number" id="AddNumber" name="AddNumber" required>
-            </div>                       
-            <input type="submit" id = "Submit" name="Submit" value="Add Task">
-        </form> 
-        <form id = "deleteTask">
-            <h3>Delete Task</h3>
-            <div>
-                <label for="DeleteMonth">Month:</label>
-                <select id="DeleteMonth" name="DeleteMonth" required>
-                    <option value="">Select Month</option>
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
-                </select>
-            </div>
-            <div>
-                <label for="DeleteDay">Day:</label>
-                <input type="number" id="DeleteDay" name="DeleteDay" min="1" max="31" required>
-            </div>
-            <div>
-                <label for="DeleteNumber">Number:</label>
-                <input type="number" id="DeleteNumber" name="DeleteNumber" required>
-            </div>                       
-            <input type="submit" id = "Submit" name="Submit" value="Delete Task">
-        </form> 
-        <form id = "modifyTask">
-            <h3>Modify Task</h3>
-            <p><small>Enter the Month, Day and Number to find the task, then enter the new values</small></p>
-            <fieldset>
-                <legend>Find Task By:</legend>
-                <div>
-                    <label for="OriginalMonth">Month:</label>
-                    <select id="OriginalMonth" name="OriginalMonth" required>
+            <div class="formGrid">
+                <div class="label"><label for="TaskName">Name:</label></div>
+                <div class="input"><input type="text" id="TaskName" name="TaskName"></div>
+
+                <div class="label"><label for="AddMonth">Month:</label></div>
+                <div class="input">
+                    <select id="AddMonth" name="AddMonth" required>
                         <option value="">Select Month</option>
                         <option value="0">January</option>
                         <option value="1">February</option>
@@ -135,24 +72,82 @@
                         <option value="11">December</option>
                     </select>
                 </div>
-                <div>
-                    <label for="OriginalDay">Day:</label>
-                    <input type="number" id="OriginalDay" name="OriginalDay" min="1" max="31" required>
-                </div>
-                <div>
-                    <label for="OriginalNumber">Number:</label>
-                    <input type="number" id="OriginalNumber" name="OriginalNumber" required>
+
+                <div class="label"><label for="AddDay">Day:</label></div>
+                <div class="input"><input type="number" id="AddDay" name="AddDay" min="1" max="31" required></div>
+
+                <div class="label"><label for="AddNumber">Number:</label></div>
+                <div class="input"><input type="number" id="AddNumber" name="AddNumber" required></div>
+            </div>
+            <input type="submit" id="Submit" name="Submit" value="Add Task">
+        </form>
+        <form id="deleteTask">
+            <h3>Delete Task</h3>
+            <div class="formGrid">
+                <div class="label"><label for="DeleteMonth">Month:</label></div>
+                <div class="input"><select id="DeleteMonth" name="DeleteMonth" required>
+                    <option value="">Select Month</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select></div>
+
+                <div class="label"><label for="DeleteDay">Day:</label></div>
+                <div class="input"><input type="number" id="DeleteDay" name="DeleteDay" min="1" max="31" required></div>
+
+                <div class="label"><label for="DeleteNumber">Number:</label></div>
+                <div class="input"><input type="number" id="DeleteNumber" name="DeleteNumber" required></div>
+            </div>                       
+            <input type="submit" id="Submit" name="Submit" value="Delete Task">
+        </form>
+        <form id="modifyTask">
+            <h3>Modify Task</h3>
+            <p><small>Enter the Month, Day and Number to find the task, then enter the new values</small></p>
+            <fieldset>
+                <legend>Find Task By:</legend>
+                <div class="formGrid">
+                    <div class="label"><label for="OriginalMonth">Month:</label></div>
+                    <div class="input"><select id="OriginalMonth" name="OriginalMonth" required>
+                        <option value="">Select Month</option>
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select></div>
+
+                    <div class="label"><label for="OriginalDay">Day:</label></div>
+                    <div class="input"><input type="number" id="OriginalDay" name="OriginalDay" min="1" max="31" required></div>
+
+                    <div class="label"><label for="OriginalNumber">Number:</label></div>
+                    <div class="input"><input type="number" id="OriginalNumber" name="OriginalNumber" required></div>
                 </div>
             </fieldset>
+            <br>
             <fieldset>
                 <legend>New Values (leave blank to keep same):</legend>
-                <div>
-                    <label for="NewTask">New Name:</label>
-                    <input type="text" id="NewTask" name="NewTask">
-                </div>
-                <div>
-                    <label for="NewMonth">New Month:</label>
-                    <select id="NewMonth" name="NewMonth">
+                <div class="formGrid">
+                    <div class="label"><label for="NewTask">New Name:</label></div>
+                    <div class="input"><input type="text" id="NewTask" name="NewTask"></div>
+
+                    <div class="label"><label for="NewMonth">New Month:</label></div>
+                    <div class="input"><select id="NewMonth" name="NewMonth">
                         <option value="">Keep Same</option>
                         <option value="0">January</option>
                         <option value="1">February</option>
@@ -166,20 +161,18 @@
                         <option value="9">October</option>
                         <option value="10">November</option>
                         <option value="11">December</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="NewDay">New Day:</label>
-                    <input type="number" id="NewDay" name="NewDay" min="1" max="31">
-                </div>
-                <div>
-                    <label for="NewNumber">New Number:</label>
-                    <input type="number" id="NewNumber" name="NewNumber">
+                    </select></div>
+
+                    <div class="label"><label for="NewDay">New Day:</label></div>
+                    <div class="input"><input type="number" id="NewDay" name="NewDay" min="1" max="31"></div>
+
+                    <div class="label"><label for="NewNumber">New Number:</label></div>
+                    <div class="input"><input type="number" id="NewNumber" name="NewNumber"></div>
                 </div>
             </fieldset>
-            <input type="submit" id = "Submit" name="Submit" value="Modify Task">
-        </form> 
-   </div>
+            <input type="submit" id="Submit" name="Submit" value="Modify Task">
+        </form>
+    </div>
     
    <div id="calendar"></div>
   <p><small>Total: <span id="cnt">0</span></small></p>
