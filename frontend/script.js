@@ -208,7 +208,7 @@ async function taskModified(event) {
 
 
 
-console.log("sTARTED");
+console.log("Successfully started!");
 generateCalendar();
 displayTasks();
 document.getElementById("addTask").addEventListener("submit",taskAdded);
@@ -221,7 +221,7 @@ document.getElementById("monthSelector").addEventListener("change", (e) => {
     if (selectedMonth !== "") {
         const monthElement = document.getElementById(`month-${selectedMonth}`);
         if (monthElement) {
-            monthElement.scrollIntoView({ behavior: 'smooth' });
+            monthElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
             e.target.value = ""; // Reset dropdown
         }
     }
