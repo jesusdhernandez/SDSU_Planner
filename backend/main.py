@@ -2,16 +2,25 @@ import json, uuid
 from flask import Flask, request, jsonify, send_from_directory
 import sys
 from pathlib import Path
+import webbrowser
+import threading
 
 
-BACKEND_DIR  = Path(__file__).resolve().parent           # .../project/backend
-PROJECT_ROOT = BACKEND_DIR.parent                        # .../project
-FRONTEND_DIR = PROJECT_ROOT / "frontend"                 # .../project/frontend
-DATA         = BACKEND_DIR / "tasks.json"               # .../project/tasks.json
+HERE = Path(__file__).resolve().parent   
 
-
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+    # Running as a PyInstaller bundle
+    BASE_DIR = Path(sys._MEIPASS)       # temporary unpacked folder
+    FRONTEND_DIR = BASE_DIR / "frontend"
+    DATA = BASE_DIR / "tasks.json"
+else:
+    # Running from source
+    PROJECT_ROOT = HERE.parent          # project root (..)
+    FRONTEND_DIR = PROJECT_ROOT / "frontend"
+    DATA = HERE / "tasks.json"
 
 app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="/")
+
 
 
 def load():
@@ -120,6 +129,13 @@ def modify_task():
 
 
 
-if __name__ == "__main__":
-    app.run()
 
+def open_browser():
+    webbrowser.open_new("http://127.0.0.1:5000/")
+
+if __name__ == "__main__":
+    # Open the browser 1 second after the server starts
+    threading.Timer(1.0, open_browser).start()
+
+    # Start Flask
+    app.run(host="127.0.0.1", port=5000)
