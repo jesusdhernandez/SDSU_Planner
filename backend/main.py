@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 import webbrowser
 import threading
+import datetime
 
 
 HERE = Path(__file__).resolve().parent   
@@ -31,6 +32,29 @@ def load():
 def overwrite(tasks):
     with DATA.open("w") as f:
         json.dump(tasks, f, indent=2)
+
+
+def is_leap_year(year):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+
+def get_days_in_month(month, year):
+    days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if month == 1 and is_leap_year(year):
+        return 29
+    return days[month]
+
+
+def month_to_day_range(month, year=None):
+    """Return (start_day, end_day) day-of-year range for 0-based month."""
+    if year is None:
+        year = datetime.date.today().year
+    start = 1
+    for m in range(0, month):
+        start += get_days_in_month(m, year)
+    days = get_days_in_month(month, year)
+    end = start + days - 1
+    return start, end
 
 @app.route("/")
 def index():
@@ -83,6 +107,39 @@ def remove_task():
     data["list_of_tasks"] = new_tasks
     overwrite(data)
     return jsonify(deleted_task), 200
+
+
+@app.route("/api/tasks/month/<int:month>", methods=["DELETE", "POST", "OPTIONS"])
+def clear_month(month):
+    """Clear all tasks for the given 0-based month index."""
+    year = datetime.date.today().year
+    start, end = month_to_day_range(month, year)
+    data = load()
+    original = data.get("list_of_tasks", [])
+    remaining = [t for t in original if not (start <= int(t.get("day")) <= end)]
+    deleted_tasks = [t for t in original if (start <= int(t.get("day")) <= end)]
+    deleted_count = len(deleted_tasks)
+    if deleted_count == 0:
+        return jsonify({"deleted": 0, "tasks": []}), 200
+    data["list_of_tasks"] = remaining
+    data["number_of_tasks"] = len(remaining)
+    overwrite(data)
+    return jsonify({"deleted": deleted_count, "tasks": deleted_tasks}), 200
+
+
+@app.route("/api/tasks/clear_all", methods=["DELETE", "POST", "OPTIONS"])
+def clear_all():
+    """Clear all tasks from storage and return deleted tasks for undo."""
+    data = load()
+    original = data.get("list_of_tasks", [])
+    deleted_tasks = list(original)
+    deleted_count = len(deleted_tasks)
+    if deleted_count == 0:
+        return jsonify({"deleted": 0, "tasks": []}), 200
+    data["list_of_tasks"] = []
+    data["number_of_tasks"] = 0
+    overwrite(data)
+    return jsonify({"deleted": deleted_count, "tasks": deleted_tasks}), 200
 
 @app.route("/api/tasks", methods=["PUT"])
 def modify_task():

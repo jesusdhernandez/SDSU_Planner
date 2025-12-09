@@ -1,5 +1,5 @@
 {
-  "number_of_tasks": 17,
+  "number_of_tasks": 8,
   "list_of_tasks": [
     {
       "id": "0f336674-8af6-47c2-a24d-5480950b2bb3",
@@ -30,45 +30,10 @@
       "done": false
     },
     {
-      "id": "14faa5b9-8067-43a5-b001-5c1d6f0f8b07",
-      "title": "CS 250 Project Deadline",
-      "day": 344,
-      "number": 1,
-      "done": false
-    },
-    {
-      "id": "7eb6eab5-1a21-44d2-a356-e55edbee84f0",
-      "title": "I have a test on this day and honestly bro, I finna bomb it",
-      "day": 344,
-      "number": 2,
-      "done": false
-    },
-    {
-      "id": "aa5e8468-2fcb-424d-abd8-5e99b7e54e01",
-      "title": "CS 250 Project Deadline",
-      "day": 344,
+      "id": "ca95882c-2e48-4f69-aeb7-6f9610e451cf",
+      "title": "Bday",
+      "day": 234,
       "number": 3,
-      "done": false
-    },
-    {
-      "id": "d9a2fa09-a719-40ce-a482-667d6a61d49e",
-      "title": "asfasfasfasf",
-      "day": 344,
-      "number": 4,
-      "done": false
-    },
-    {
-      "id": "2b90dca7-e8f7-4884-b61d-274cc377102d",
-      "title": "I have a test on this day and honestly bro, I finna bomb it",
-      "day": 344,
-      "number": 5,
-      "done": false
-    },
-    {
-      "id": "290db3d8-b3b9-4059-a012-7eaea0098078",
-      "title": "I have a test on this day and honestly bro, I finna bomb it",
-      "day": 344,
-      "number": 6,
       "done": false
     }
   ]

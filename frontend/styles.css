@@ -145,6 +145,38 @@ body
     background-color: #005a9e;
 }
 
+.clear-month-btn, .clear-all-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 8px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.clear-all-btn { background-color: #b52b2b }
+.clear-month-btn:hover, .clear-all-btn:hover { opacity: 0.95 }
+
+/* Ensure the global Clear All sits to the right inside #month-nav */
+#month-nav .clear-all-btn {
+    margin-left: auto;
+}
+
+.global-undo-btn {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 8px 6px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.global-undo-btn:disabled { opacity: 0.5; cursor: default }
+
 .month-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
