@@ -295,12 +295,10 @@ async function taskModified(event) {
     // New values (can be empty to keep original)
     const title = data.get("NewTask").toString().trim();
     
-    let day = original_day;
-    if (data.get("NewMonth") && data.get("NewDay")) {
-        const newMonth = Number(data.get("NewMonth"));
-        const newDayOfMonth = Number(data.get("NewDay"));
-        day = monthDayToDayNumber(newMonth, newDayOfMonth);
-    }
+    // Handle new day calculation - use original values if new ones aren't provided
+    let newMonth = data.get("NewMonth") !== "" ? Number(data.get("NewMonth")) : originalMonth;
+    let newDayOfMonth = data.get("NewDay") ? Number(data.get("NewDay")) : originalDayOfMonth;
+    const day = monthDayToDayNumber(newMonth, newDayOfMonth);
     
     const number = data.get("NewNumber") ? Number(data.get("NewNumber")) : original_number;
     

@@ -1,5 +1,5 @@
 {
-  "number_of_tasks": 8,
+  "number_of_tasks": 9,
   "list_of_tasks": [
     {
       "id": "0f336674-8af6-47c2-a24d-5480950b2bb3",
@@ -10,9 +10,9 @@
     },
     {
       "id": "196b062c-f0ea-4433-a308-3b18a3a07d7d",
-      "title": "2",
+      "title": "Free time",
       "day": 1,
-      "number": 2,
+      "number": 1,
       "done": false
     },
     {
@@ -34,6 +34,13 @@
       "title": "Bday",
       "day": 234,
       "number": 3,
+      "done": false
+    },
+    {
+      "id": "a649511f-41d9-4eb9-9eb3-616bfa7d9774",
+      "title": "yee",
+      "day": 61,
+      "number": 1,
       "done": false
     }
   ]

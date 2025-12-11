@@ -160,22 +160,80 @@ def modify_task():
     print(f"Will update to: title={new_title}, day={new_day}, number={new_number}")
     
     data = load()
-    task_found = False
+    task = None
     
-    for task in data["list_of_tasks"]:
-        if task["day"] == original_day and task["number"] == original_number:
+    # Find the task to modify
+    for t in data["list_of_tasks"]:
+        if t["day"] == original_day and t["number"] == original_number:
+            task = t
             print(f"Found task: {task}")
-            if new_title:
-                task["title"] = new_title.strip()
-            task["day"] = new_day
-            task["number"] = new_number
-            task_found = True
-            print(f"Updated task: {task}")
             break
     
-    if not task_found:
+    if not task:
         print("Task not found!")
         return jsonify({"error": "Task not found"}), 404
+    
+    # Check if moving to a different day or changing number
+    moving_day = (new_day != original_day)
+    changing_number = (new_number != original_number)
+    
+    if moving_day:
+        # Moving to a different day
+        print(f"Moving task from day {original_day} to day {new_day}")
+        
+        # Decrement numbers on original day for tasks after the removed slot
+        for t in data["list_of_tasks"]:
+            if t is task:
+                continue
+            if t["day"] == original_day and t["number"] > original_number:
+                t["number"] -= 1
+                print(f"Decremented task on original day: {t}")
+        
+        # Check for conflicts on destination day
+        conflict = False
+        for t in data["list_of_tasks"]:
+            if t is task:
+                continue
+            if t["day"] == new_day and t["number"] == new_number:
+                conflict = True
+                break
+        
+        if conflict:
+            # Increment numbers on destination day for tasks at/after insertion slot
+            for t in data["list_of_tasks"]:
+                if t is task:
+                    continue
+                if t["day"] == new_day and t["number"] >= new_number:
+                    t["number"] += 1
+                    print(f"Incremented task on destination day: {t}")
+    
+    elif changing_number:
+        # Reordering within same day
+        print(f"Reordering task on day {original_day} from number {original_number} to {new_number}")
+        
+        if new_number > original_number:
+            # Moving down: shift tasks between old and new position up
+            for t in data["list_of_tasks"]:
+                if t is task:
+                    continue
+                if t["day"] == original_day and original_number < t["number"] <= new_number:
+                    t["number"] -= 1
+                    print(f"Shifted task up: {t}")
+        elif new_number < original_number:
+            # Moving up: shift tasks between new and old position down
+            for t in data["list_of_tasks"]:
+                if t is task:
+                    continue
+                if t["day"] == original_day and new_number <= t["number"] < original_number:
+                    t["number"] += 1
+                    print(f"Shifted task down: {t}")
+    
+    # Update the task
+    if new_title:
+        task["title"] = new_title.strip()
+    task["day"] = new_day
+    task["number"] = new_number
+    print(f"Updated task: {task}")
     
     overwrite(data)
     print("Task saved successfully")
