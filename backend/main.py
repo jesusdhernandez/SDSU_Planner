@@ -233,6 +233,9 @@ def modify_task():
         task["title"] = new_title.strip()
     task["day"] = new_day
     task["number"] = new_number
+    # Handle done flag if provided
+    if "done" in d:
+        task["done"] = d.get("done", False)
     print(f"Updated task: {task}")
     
     overwrite(data)

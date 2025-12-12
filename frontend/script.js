@@ -214,6 +214,20 @@ function addTaskToUI(task){
     const li = document.createElement("li");
     li.id = `task-${task.id}`;
     li.textContent = `${task.number}. ${task.title}`;
+    
+    // Make task completed if done flag is set
+    if(task.done){
+        li.style.textDecoration = 'line-through';
+        li.style.opacity = '0.6';
+    }
+    
+    // Add click handler to show context menu
+    li.style.cursor = 'pointer';
+    li.onclick = (e) => {
+        e.stopPropagation();
+        showTaskMenu(e, task);
+    };
+    
     ul.appendChild(li);
 }
 
@@ -331,6 +345,128 @@ displayTasks();
 document.getElementById("addTask").addEventListener("submit",taskAdded);
 document.getElementById("deleteTask").addEventListener("submit",taskDeleted);
 document.getElementById("modifyTask").addEventListener("submit",taskModified);
+
+// Context menu for tasks
+function showTaskMenu(e, task) {
+    // Remove existing menu if any
+    const existing = document.getElementById('task-context-menu');
+    if(existing) existing.remove();
+    
+    const menu = document.createElement('div');
+    menu.id = 'task-context-menu';
+    menu.className = 'task-context-menu';
+    
+    // Convert day back to month/day for display
+    const year = new Date().getFullYear();
+    let dayCounter = 0;
+    let displayMonth = 0, displayDay = 0;
+    for(let m = 0; m < 12; m++) {
+        const daysInM = getDaysInMonth(m, year);
+        if(dayCounter + daysInM >= task.day) {
+            displayMonth = m;
+            displayDay = task.day - dayCounter;
+            break;
+        }
+        dayCounter += daysInM;
+    }
+    
+    const modifyBtn = document.createElement('button');
+    modifyBtn.textContent = `Modify`;
+    modifyBtn.onclick = () => {
+        document.getElementById("OriginalMonth").value = displayMonth;
+        document.getElementById("OriginalDay").value = displayDay;
+        document.getElementById("OriginalNumber").value = task.number;
+        document.querySelector("#modifyTask").scrollIntoView({ behavior: 'smooth' });
+        menu.remove();
+    };
+    
+    const completeBtn = document.createElement('button');
+    completeBtn.textContent = task.done ? 'Mark Incomplete' : 'Mark Complete';
+    completeBtn.onclick = async () => {
+        try {
+            // Toggle the done status
+            const updatedTask = {...task, done: !task.done};
+            await api("/api/tasks", {
+                method: "PUT", 
+                body: JSON.stringify({
+                    original_day: task.day,
+                    original_number: task.number,
+                    title: task.title,
+                    day: task.day,
+                    number: task.number,
+                    done: updatedTask.done
+                })
+            });
+            lastAction = { type: 'modify', original: task, updated: updatedTask };
+            updateUndoUI();
+            await displayTasks();
+            menu.remove();
+        } catch(err) {
+            console.error('Error marking task:', err);
+            alert('Error updating task: ' + err.message);
+            menu.remove();
+        }
+    };
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = async () => {
+        if(!confirm(`Delete "${task.title}"?`)) {
+            menu.remove();
+            return;
+        }
+        try {
+            const deleted = await api("/api/tasks", {
+                method: "DELETE",
+                body: JSON.stringify({day: task.day, number: task.number})
+            });
+            lastAction = { type: 'delete', task: deleted };
+            updateUndoUI();
+            await displayTasks();
+            menu.remove();
+        } catch(err) {
+            console.error('Error deleting task:', err);
+            alert('Error deleting task: ' + err.message);
+            menu.remove();
+        }
+    };
+    
+    menu.appendChild(modifyBtn);
+    menu.appendChild(completeBtn);
+    menu.appendChild(deleteBtn);
+    
+    document.body.appendChild(menu);
+    
+    // Get the clicked task element
+    const taskElement = e.target;
+    const rect = taskElement.getBoundingClientRect();
+    
+    // Calculate position relative to viewport, then adjust for scroll
+    let top = rect.bottom + window.scrollY + 5; // Below the task
+    let left = rect.right + window.scrollX + 10; // To the right of the task
+    
+    // Check if menu would go off the right edge of screen
+    if(left + 200 > window.innerWidth + window.scrollX) {
+        left = rect.left + window.scrollX - 210; // Position to the left instead
+    }
+    
+    // Check if menu would go off the bottom of screen
+    if(top + 100 > window.innerHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 110; // Position above
+    }
+    
+    menu.style.top = top + 'px';
+    menu.style.left = left + 'px';
+    
+    // Close menu when clicking elsewhere
+    const closeMenu = () => {
+        if(menu) menu.remove();
+        document.removeEventListener('click', closeMenu);
+    };
+    setTimeout(() => {
+        document.addEventListener('click', closeMenu);
+    }, 0);
+}
 
 // Month navigation dropdown
 document.getElementById("monthSelector").addEventListener("change", (e) => {

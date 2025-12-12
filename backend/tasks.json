@@ -17,8 +17,8 @@
     },
     {
       "id": "c419dda3-c548-4d8d-979d-5ffa82ab3b68",
-      "title": "Yurp",
-      "day": 3,
+      "title": "a",
+      "day": 5,
       "number": 1,
       "done": false
     },
@@ -34,13 +34,6 @@
       "title": "Bday",
       "day": 234,
       "number": 3,
-      "done": false
-    },
-    {
-      "id": "a649511f-41d9-4eb9-9eb3-616bfa7d9774",
-      "title": "aa",
-      "day": 1,
-      "number": 2,
       "done": false
     }
   ]
